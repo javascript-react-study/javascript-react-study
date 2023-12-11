@@ -194,10 +194,12 @@ export default ScrollToExample;
 
 위 예시에서 div는 모두 각자 ref를 가지고 있고 그 ref.current를 콘솔로 출력해보면
 ![](https://velog.velcdn.com/images/qwzx16/post/ab82d060-abcb-4fb7-9a40-1d567dadb5b4/image.png)
+
 div 태그 자체를 가지고 있다는 것을 확인할수 있습니다
 div를 담을수 있는 상자라는 것입니다 !
 
 ![](https://velog.velcdn.com/images/qwzx16/post/dcf4f2d7-b99a-4744-9b12-c7f644a7174a/image.png)
+
 간단한 예시로 위는 동일한 환경에서 ref.current.className을 출력해본 것입니다.
 class를 이용해 스타일 변경에도 이용할수 있겠죠
 
