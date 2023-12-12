@@ -80,7 +80,7 @@
   ```
 
 - devtools를 설치했다면, 하단에 꽃모양 아이콘을 클릭하면 현재 불러오고 있는 데이터들이 무엇이 있는지 한 눈에 확인할 수 있음
-  ![devtools](C:\Users\bybee\Desktop\Study_kkoal\Study\javascript-react-study\seoa\React query와 상태 관리\devtools.png)
+  ![devtools](React query와 상태 관리/devtools.png)
 
 ### 2. Query & Mutation
 
@@ -97,7 +97,7 @@
 
      - 첫번째 인자: Query Key로 응답 데이터를 캐싱할 때 사용되는 Unique key
      - 두번째 인자: Query Function으로 Promise를 반환하는 함수, 쿼리 요청을 수행하기 위한 fetch, axios 등의 함수를 의미함
-     - 세번째 인사: useQuery에 사용되는 옵션을 지정하는 객체
+     - 세번째 인자: useQuery에 사용되는 옵션을 지정하는 객체
 
    - useQuery로 받을 수 있는 리턴값
 
