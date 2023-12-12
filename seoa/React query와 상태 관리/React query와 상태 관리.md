@@ -80,7 +80,7 @@
   ```
 
 - devtools를 설치했다면, 하단에 꽃모양 아이콘을 클릭하면 현재 불러오고 있는 데이터들이 무엇이 있는지 한 눈에 확인할 수 있음
-  ![devtools](React query와 상태 관리/devtools.png)
+  ![devtools](devtools.png)
 
 ### 2. Query & Mutation
 
