@@ -8,18 +8,21 @@
 
 ## 상태를 두 가지로 나누면,
 
-| Client State              | Server State              |
-| ------------------------- | ------------------------- |
-| Ownership이 Client에 있음 | Ownership이 Server에 있음 |
+### Client State
 
-| - Client에서 소유하며 온전히 제어 가능함
-
+- **Ownership이 Client에 있음**
+- Client에서 소유하며 온전히 제어 가능함
 - 초기값 설정이나 조작에 제약사항 없음
 - 다른 사람들과 공유되지 않으며 Client 내에서 UI/UX 흐름이나 사용자 인터랙션에 따라 변할 수 있음
-- 항상 Client 내에서 최신 상태로 관리됨 | - Client에서 제어하거나 소유되지 않는 원격의 공간에서 관리, 유지됨
+- 항상 Client 내에서 최신 상태로 관리됨
+
+### Server State
+
+- **Ownership이 Server에 있음**
+- Client에서 제어하거나 소유되지 않는 원격의 공간에서 관리, 유지됨
 - Fetching이나 Updating에 비동기 API가 필요함
 - 다른 사람들과 공유되는 것으로 사용자가 모르는 사이에 변경될 수 있음
-- 신경 쓰지 않는다면 잠재적으로 ‘out of date’가 될 가능성을 지님 |
+- 신경 쓰지 않는다면 잠재적으로 ‘out of date’가 될 가능성을 지님
 
 # 상태 관리?
 
