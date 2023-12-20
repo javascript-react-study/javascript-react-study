@@ -153,11 +153,11 @@ Promise.then(() => {
 
 ### async / await
 
-Promise는 새로운 Promise객체를 생성하는 과정이 좀 귀찮게 느껴질수 있어요.
+`Promise`를 사용할때 `then`과 `catch`를 이용해서 다음에 동작할 코드를 작성해주는데
 
-그래서 `ES8` 신문법으로 `async/await` 패턴이 또 등장합니다!
+`ES8` 신문법으로 `async/await` 패턴이 또 등장합니다!
 
-이 둘은 세트로 움직입니다.
+이 둘은 대부분의 상황에서 세트로 움직입니다.
 
 ```javascript
 const getTodo = async () => {
@@ -180,6 +180,8 @@ getTodo.then(() => {
 async 키워드를 입력하여 async함수임을 선언해줍니다.
 
 그 안에서 await 키워드를 사용해 Promise의 결과가 반환될때 까지 기다립니다.
+
+`try/catch`를 이용해 `then/catch`를 대체해주는 모습을 볼수 있습니다.
 
 위 패턴은 제가 자주 사용하는 패턴인데 axios 혹은 fetch는 Promise 기반으로 만들어져 있습니다.
 
