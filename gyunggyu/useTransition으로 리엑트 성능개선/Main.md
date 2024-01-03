@@ -178,6 +178,7 @@ export default App;
 ```
 
 삼항연산자를 이용하여 `isPendiong`이 `true`일 경우 보여줄 요소를 만들었습니다.
+
 ![Alt text](<Input 성능개선 2차.gif>)
 
 처음과 비교하여 놀라운 성능개선을 이뤄냈습니다 !
