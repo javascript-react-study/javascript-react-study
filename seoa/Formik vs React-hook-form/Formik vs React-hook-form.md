@@ -2,24 +2,24 @@
 
 # 리액트에서 Form 사용하기
 
-- 리액트는 form을 사용할 때 form의 input value를  `setState()`로 관리해서 개발할 때 직접 form data를 제어하는 방식을 권장함 → Controlled Component라고 함
-    - Controlled Component: 사용자가 input 값을 변경할 때마다 form도 업데이트되고, value는 state에 저장됨
-    - Uncontrolled Compoenent: 전통적으로 HTML에서 form을 입력받는 방식으로, value에 접근하기 위해서 ref를 사용해야 함
+- 리액트는 form을 사용할 때 form의 input value를 `setState()`로 관리해서 개발할 때 직접 form data를 제어하는 방식을 권장함 → Controlled Component라고 함
+  - Controlled Component: 사용자가 input 값을 변경할 때마다 form도 업데이트되고, value는 state에 저장됨
+  - Uncontrolled Compoenent: 전통적으로 HTML에서 form을 입력받는 방식으로, value에 접근하기 위해서 ref를 사용해야 함
 
 ```jsx
-import React, { useState } from "react"
+import React, { useState } from "react";
 
 const FormComponent = () => {
-  const [inputValue, setInputValue] = useState<string>("")
+  const [inputValue, setInputValue] = useState < string > "";
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value)
-  } // store input value as a state
+    setInputValue(e.target.value);
+  }; // store input value as a state
 
   const handleSubmit = () => {
     // submit logic here...
-    console.log(inputValue)
-  }
+    console.log(inputValue);
+  };
 
   return (
     <>
@@ -31,13 +31,13 @@ const FormComponent = () => {
         <input type="submit" value="Submit" />
       </form>
     </>
-  )
-}
+  );
+};
 
 export default FormComponent;
 ```
 
-- 위의 예시는 가장 기본적인 form 사용 예시이고, 실제로 form 웹 개발을 하면서 사용할 때에는 각각의 다른 component에서 user가 입력하는 값을 저장해두었다가 최종적으로 한 곳에 입력값들을 모아서  submit handling을 해야하는 경우들이 많음
+- 위의 예시는 가장 기본적인 form 사용 예시이고, 실제로 form 웹 개발을 하면서 사용할 때에는 각각의 다른 component에서 user가 입력하는 값을 저장해두었다가 최종적으로 한 곳에 입력값들을 모아서 submit handling을 해야하는 경우들이 많음
 - 즉 form을 사용하면서 전역 상태 관리를 함께 해야하는 이슈가 생기는데, 그 때마다 `useState()`로 state를 관리하고, 상위 컴포넌트에서 `handleChange()` 함수를 넘겨주는 방식은 코드의 가독성을 떨어뜨림
 
 # Formik
@@ -58,39 +58,35 @@ export default FormComponent;
 
 - Formik의 dependency는 8개, React-hook-form은 dependency-free라는 장점이 있음
 
-![Untitled](Formik%20vs%20React-hook-form%20176e30f36720442ebb2379c28a2052af/Untitled.png)
+![formik](formik.png)
 
-![Untitled](Formik%20vs%20React-hook-form%20176e30f36720442ebb2379c28a2052af/Untitled%201.png)
+![react-hook-form](react-hook-form.png)
 
 ## Controlled Component
 
 - Formik은 제어 가능한 컴포넌트이기 때문에 아래 예시처럼 onChange()를 사용하고 formik.values.email로 값에 접근이 용이함
-    
-    ```jsx
-    <input
-    	id="email"
-    	name="email"
-    	type="email"
-    	onChange={formik.handleChange}
-    	value={formik.values.email}
-    />
-    ```
-    
+  ```jsx
+  <input
+    id="email"
+    name="email"
+    type="email"
+    onChange={formik.handleChange}
+    value={formik.values.email}
+  />
+  ```
 - React-Hook-Form은 제어가 불가능한 컴포넌트(Uncontrolled Component)
-    - Uncontrolled Component는 React 코드와 non-React 코드를 통일하기 좋지만, 값을 제어하기 위해서는 ref를 사용해서 접근해야 함
-    - watch API를 사용해서 다른 Controlled Component들과 혼합해서 사용하는 것이 가능하지만, 권장하는 방식이 아니기 때문에 Controlled Component를 권장하는 React 환경이나 ref를 사용하기 어려운 환경에서는 적합한 라이브러리가 아닐 수 있음
-    
-    ```jsx
-    <input
-    	{...rest}
-    	name="email"
-    	ref = {(e) => {
-    		ref(e);
-    		emailRef.current = e;
-    	}}
-    />
-    ```
-    
+  - Uncontrolled Component는 React 코드와 non-React 코드를 통일하기 좋지만, 값을 제어하기 위해서는 ref를 사용해서 접근해야 함
+  - watch API를 사용해서 다른 Controlled Component들과 혼합해서 사용하는 것이 가능하지만, 권장하는 방식이 아니기 때문에 Controlled Component를 권장하는 React 환경이나 ref를 사용하기 어려운 환경에서는 적합한 라이브러리가 아닐 수 있음
+  ```jsx
+  <input
+    {...rest}
+    name="email"
+    ref={(e) => {
+      ref(e);
+      emailRef.current = e;
+    }}
+  />
+  ```
 
 ## State Management
 
@@ -102,9 +98,9 @@ export default FormComponent;
 
 # Formik vs React-hook-form
 
-![Untitled](Formik%20vs%20React-hook-form%20176e30f36720442ebb2379c28a2052af/Untitled%202.png)
+![table](table.png)
 
-![Untitled](Formik%20vs%20React-hook-form%20176e30f36720442ebb2379c28a2052af/Untitled%203.png)
+![graph](graph.png)
 
 ## 코드 비교
 
@@ -112,23 +108,23 @@ export default FormComponent;
 
 ```jsx
 // formik
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field } from "formik";
 
 const validateEmail = (value) => {
   if (!value) {
-    return 'Required';
+    return "Required";
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
-    return 'invalid email address';
+    return "invalid email address";
   }
 };
 
-const validateUsername = (value) => value !== 'admin' || 'Nice try!';
+const validateUsername = (value) => value !== "admin" || "Nice try!";
 
 export default function App() {
   const onSubmit = (values) => console.log(values);
 
   return (
-    <Formik initialValues={{ email: '', username: '' }} onSubmit={onSubmit}>
+    <Formik initialValues={{ email: "", username: "" }} onSubmit={onSubmit}>
       {({ errors }) => (
         <Form>
           <Field name="email" validate={validateEmail} />
@@ -149,13 +145,13 @@ export default function App() {
 
 ```jsx
 // react-hook-form
-import { useForm } from 'react-hook-form';
+import { useForm } from "react-hook-form";
 
 export default function App() {
   const {
     handleSubmit,
     register,
-    formState: { errors }
+    formState: { errors },
   } = useForm();
 
   const onSubmit = (values) => console.log(values);
@@ -163,19 +159,19 @@ export default function App() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <input
-        {...register('email', {
-          required: 'Required',
+        {...register("email", {
+          required: "Required",
           pattern: {
             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-            message: 'invalid email address'
-          }
+            message: "invalid email address",
+          },
         })}
       />
       {errors.email && <span>{errors.email.message}</span>}
 
       <input
-        {...register('username', {
-          validate: (value) => value !== 'admin' || 'Nice try!'
+        {...register("username", {
+          validate: (value) => value !== "admin" || "Nice try!",
         })}
       />
       {errors.username && <span>{errors.username.message}</span>}
