@@ -169,65 +169,12 @@ const useScrollFadeIn = () => {
 ## react-spring으로 배너에 애니메이션 구현하기
 
 - 애니메이션 배너 컴포넌트 만들기
-
-```html
-import clsx from 'clsx'; import { useRouter } from 'next/router'; import {
-StaticImageData } from 'next/image'; import { AnimationBannerStyled } from
-'./styled'; import { useEffect, useState, useRef } from 'react'; import {
-useSpring, animated } from '@react-spring/web'; export interface
-AnimationBannerProps { className?: string; imageSrc: StaticImageData; } const
-AnimationBanner = ({ className, imageSrc }: AnimationBannerProps) => { // 배너
-애니메이션 효과 const bannerRef = useRef<HTMLDivElement
-  >(null); const [isInViewPort, setIsInViewPort] = useState(false); useEffect(()
-  => { const handleScroll = () => { const bannerRect =
-  bannerRef.current?.getBoundingClientRect(); const isInView = bannerRect !==
-  undefined && bannerRect.top < window.innerHeight && bannerRect.bottom > 0;
-  setIsInViewPort(isInView); }; window.addEventListener('scroll', handleScroll);
-  return () => { window.removeEventListener('scroll', handleScroll); }; }, []);
-  const bannerAnimation = useSpring({ opacity: isInViewPort ? 1 : 0, transform:
-  isInViewPort ? 'translateY(0)' : 'translateY(100%)', config: { duration: 500
-  }, }); return (
-  <AnimationBannerStyled>
-    <animated.div ref="{bannerRef" as React.MutableRefObject<HTMLDivElement
-      >} style={bannerAnimation} className="phonePlanBanner" >
-      <img src="{imageSrc.src}" alt="{`${imageSrc}" 배너`} />
-    </animated.div>
-  </AnimationBannerStyled>
-  ); }; export default AnimationBanner;</HTMLDivElement
->
-```
+  ![Banner](리액트스프링_배너1.png)
+  ![Banner](리액트스프링_배너1.png)
 
 - 배너가 필요한 곳에 컴포넌트 삽입
-
-```html
-import clsx from 'clsx'; import { useRouter } from 'next/router'; import {
-BestPlanStyled } from './styled'; import { useEffect, useState } from 'react';
-import phoneimg from '~images/phoneList.png'; import bestPlanBanner from
-'~images/banner_bestPlan.png'; import { BestPlanItem } from
-'~/components/Main/BestPlanItem'; import gift from
-'~/assets/svg/list/ico_gift.svg'; import AnimationBanner from
-'~/components/AnimationBanner'; export interface BestPlanProps { className?:
-string; } const BestPlan = ({ className }: BestPlanProps) => { const router =
-useRouter(); // 더미데이터 const data = [ { image: phoneimg, title: '공신폰',
-company1: 'U+', company2: 'U+알뜰폰', before: 39000, after: 30200, info: '* 3년
-약정, 설치비 별도', gift: '현금 40만원', }, { image: phoneimg, title: '공신폰',
-company1: 'KT', company2: 'KT알뜰폰', before: 39000, after: 30200, info: '* 3년
-약정, 설치비 별도', gift: '현금 40만원', }, { image: phoneimg, title: '공신폰',
-company1: 'SK', company2: 'SK알뜰폰', before: 39000, after: 30200, info: '* 3년
-약정, 설치비 별도', gift: '현금 40만원', }, ]; return (
-<BestPlanStyled>
-  <div className="BestPhoneWrap">
-    <AnimationBanner imageSrc="{bestPlanBanner}" />
-
-    <div>
-      {data?.map((x: any, i: number) => { return
-      <BestPlanItem key="{i}" data="{x}" />; })}
-    </div>
-    <div className="moreBtn">더보기</div>
-  </div>
-</BestPlanStyled>
-); }; export default BestPlan;
-```
+  ![Use](리액트스프링_컴포넌트1.png)
+  ![Use](리액트스프링_컴포넌트2.png)
 
 - 구현 결과
 
