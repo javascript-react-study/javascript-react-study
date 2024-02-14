@@ -16,7 +16,33 @@
 
 기존에 서버와 통신하는 방식을 갈아엎고 React-Query로 마이그레이션이 필요하다는 것을 !
 
-오늘은 그 과정을 담아보겠다.
+## 간단하게 useEffect로 패칭하면 안되는 이유
+
+렌더링 -> 화면그리기 -> useEffect로 인한 재렌더링 -> 화면그리기
+
+두번의 화면을 그리게 된다.
+
+```jsx
+function Tooltip() {
+  const ref = useRef(null);
+  const [tooltipHeight, setTooltipHeight] = useState(0);
+  //1. height값이 0이기 때문에 0인 상태로 화면을 그린다.
+  useEffect(() => {
+    const { height } = ref.current.getBoundingClientRect();
+    setTooltipHeight(height);
+    //2. 실제 높이를 구한 후 리 렌더링을 하고 화면을 다시 그린다.
+  }, []);
+}
+```
+
+처음에 0으로 그려진 툴팁이 Effect를 만나 실제 높이를 구해와서 다시 툴팁을 그리게 된다.
+
+사실 useEffect는 이런 성능 저하에 대한 이슈가 있다.
+
+그러나 이를 이용해서 화면을 그리거나 DOM을 조작하는 등 이럴때 의존성 배열에 의해 실행되는 useEffect는 불가피하게 사용될 수 밖에 없지만
+서버 패칭의 경우에는 대한 충분히 있기 때문에 useEffect로 작성한 패칭이 무조건 틀렸다 나쁘다는 것이 아닌 더 좋은 방법이 있는데 굳이 그럴 필요가 없다는 것이다.
+
+그렇기 때문에 이번 기회에 리펙토링을 하는 과정을 가지게 되었고 실제로 사용해보며 그 과정을 담아보겠다.
 
 ## 간단하게 React-Query의 사용법에 대해
 
@@ -139,7 +165,7 @@ const query = useQuery({
 const { query } = useReviewFetch();
 
 return(
-  <>
+  <React.Fragment>
   {
     query.isPending ? (
       <ResponsiveProvider direction={'col'}>
@@ -153,11 +179,12 @@ return(
       />
     );
   }
-</>
+</React.Fragment>
 )
 ```
 
 **결과**
+
 ![Alt text](<최초 로딩, 이후 로딩 차이.gif>)
 
 리엑트 쿼리가 캐싱을 해줘서 훨씬 매끄럽게 화면에 렌더링 되는 모습을 볼수 있고 서버 데이터를 올바르게 패칭하는 방법을 배우고 적용해볼수 있었다 !
@@ -268,8 +295,11 @@ QueryClientProvider에 가깝게 배치해준다.
 이런 버튼이 나오고 클릭하면
 
 **Querty**
+
 ![Alt text](<데브툴 쿼리.png>)
+
 **Mutate**
+
 ![Alt text](<데브툴 뮤테이트.png>)
 
 이렇게 다양한 정보를 확인할수 있다.
