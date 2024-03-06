@@ -238,7 +238,7 @@ React.useEffect(() => {
 
 그럼 이제 동작이 잘 되는지 확인해보겠습니다 !
 
-![](https://velog.velcdn.com/images/qwzx16/post/2e0df24a-1e66-4cf3-84e0-32acc0f8ede3/image.gif)
+![![](https://velog.velcdn.com/images/qwzx16/post/2e0df24a-1e66-4cf3-84e0-32acc0f8ede3/image.gif)](<모달 결과.gif>)
 
 예 잘나가집니다..
 
